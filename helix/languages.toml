@@ -7,6 +7,9 @@ name = "lldb-dap"
 transport = "stdio"
 command = "lldb-dap"
 
+[language-server.rust-analyzer.config]
+check= { command = "clippy" }
+
 [[language.debugger.templates]]
 name = "binary"
 request = "launch"
