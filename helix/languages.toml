@@ -1,17 +1,43 @@
 [[language]]
 name = "rust"
 auto-format = true
+language-servers = ["rust-analyzer"]
 
-[language.debugger]
-name = "lldb-dap"
-transport = "stdio"
-command = "lldb-dap"
+[language-server.rust-analyzer]
+command = "rust-analyzer"
 
 [language-server.rust-analyzer.config]
-check= { command = "clippy" }
+check = { command = "clippy" }
+procMacro = { enable = true }
+cargo = { buildScripts = { enable = true } }
+diagnostics = { experimental = { enable = true } }
 
-[[language.debugger.templates]]
-name = "binary"
-request = "launch"
-completion = [ { name = "binary", completion = "filename" } ]
-args = { program = "{0}" }
+#[language.debugger]
+#name = "lldb-dap"
+#transport = "stdio"
+#command = "lldb-dap-20"
+#
+#[[language.debugger.templates]]
+#name = "binary"
+#request = "launch"
+#completion = [ { name = "binary", completion = "filename" } ]
+#args = { program = "{workspace}/target/debug/{basename}" }
+#
+#[[language.debugger.templates]]
+#name = "binary (release)"
+#request = "launch"
+#completion = [ { name = "binary", completion = "filename" } ]
+#args = { program = "{workspace}/target/release/{basename}" }
+#
+#[[language.debugger.templates]]
+#name = "test"
+#request = "launch"
+#completion = [ { name = "test", completion = "filename" } ]
+#args = { program = "{workspace}/target/debug/deps/{basename}" }
+#
+#[[language.debugger.templates]]
+#name = "attach"
+#request = "attach"
+#completion = [ { name = "pid", completion = "text" } ]
+#args = { pid = "{text}" }
+#

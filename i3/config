@@ -228,3 +228,6 @@ bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/volume_b
 
 # Press Windows + Shift + E to open the Power Menu (replaces the default simple exit)
 bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu.sh
+
+# Start picom to fix screen tearing
+exec_always --no-startup-id picom --backend glx --vsync

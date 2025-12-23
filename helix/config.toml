@@ -1,17 +1,119 @@
-# --- Cargo / Rust Menu (Space + c) ---
+theme = "onedark"  # Or your preferred theme
+
+[editor]
+line-number = "relative"
+cursorline = true
+auto-save = false
+completion-trigger-len = 2
+auto-pairs = true
+rulers = [80, 120]
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.file-picker]
+hidden = false  # Show hidden files in file picker
+
+# --- Cargo / Rust Menu (Space + c) --- [SAFE - not used by default]
 [keys.normal.space.c]
 r = ":sh cargo run"
+R = ":sh cargo run --release"
 b = ":sh cargo build"
+B = ":sh cargo build --release"
 t = ":sh cargo test"
+T = ":sh cargo test -- --nocapture"
 c = ":sh cargo check"
-y = ":sh cargo clippy"
+C = ":sh cargo clean"
+l = ":sh cargo clippy"
+f = ":sh cargo fmt"
+d = ":sh cargo doc --open"
+u = ":sh cargo update"
 
-# --- Launch / Debug Menu (Space + l) ---
+# --- Debug Menu (Space + x) --- [SAFE - 'x' for eXecute/debug]
+[keys.normal.space.x]
+s = ":debug-start"                       # Start debugging
+r = ":debug-remote"                      # Remote debugging
+b = "dap_toggle_breakpoint"              # Toggle breakpoint (no colon for static commands!)
+B = "dap_edit_condition"                 # Conditional breakpoint
+c = "dap_continue"                       # Continue
+n = "dap_next"                          # Step over
+i = "dap_step_in"                       # Step into
+o = "dap_step_out"                      # Step out
+t = "dap_terminate"                      # Stop debugging
+v = "dap_variables"                      # Show variables
+p = "dap_pause"                         # Pause execution
+l = "dap_edit_log"                      # Edit log message
+
+# --- Git/Version Control Menu (Space + v) --- [SAFE - 'v' for Version control]
+[keys.normal.space.v]
+s = ":sh git status"
+a = ":sh git add ."
+A = ":sh git add %{buffer_name}"        # Add current file
+c = ":sh git commit"
+C = ":sh git commit -m"
+p = ":sh git push"
+P = ":sh git pull"
+d = ":sh git diff"
+D = ":sh git diff --staged"
+l = ":sh git log --oneline -10"
+L = ":sh git log -p -1"
+b = ":sh git branch"
+f = ":sh git fetch"
+
+# --- LSP additions (Space + l) --- [SAFE - not used by default]
 [keys.normal.space.l]
-s = ":debug-start"             # This works as a typed command
-b = "dap_toggle_breakpoint"    # FIXED: Internal command (no colon)
-c = "dap_continue"             # Continue
-n = "dap_next"                 # Step Over
-i = "dap_step_in"              # Step Into
-o = "dap_step_out"             # Step Out
-t = "dap_terminate"            # Stop debugging
+d = "goto_definition"                    # Go to definition
+D = "goto_declaration"                   # Go to declaration
+t = "goto_type_definition"               # Go to type definition
+i = "goto_implementation"                # Go to implementation
+r = "goto_reference"                     # Find references
+f = "format_selections"                  # Format selection
+e = "goto_next_diag"                    # Next diagnostic
+E = "goto_prev_diag"                    # Previous diagnostic
+R = "rename_symbol"                      # Rename (moved from space+r)
+
+# --- Test Menu (Space + t) --- [SAFE - not used by default]
+[keys.normal.space.t]
+t = ":sh cargo test"
+f = ":sh cargo test --test %{selection}"          # Run specific test file
+u = ":sh cargo test --tests"                      # Run unit tests only
+i = ":sh cargo test -- --ignored"                 # Run ignored tests
+n = ":sh cargo test -- --nocapture"               # Test with output
+b = ":sh cargo bench"                             # Run benchmarks
+s = ":sh cargo nextest run"                       # If using nextest
+
+# --- Quick Run Menu (Space + q) --- [SAFE - not used by default]
+[keys.normal.space.q]
+r = ":sh cargo run < input.txt"                   # Run with input file
+R = ":sh cargo run --release < input.txt"
+e = ":sh cargo run --example"                     # Run example
+c = ":sh cargo check --all-features"              # Check with all features
+w = ":sh cargo watch -x run"                      # Watch and run (requires cargo-watch)
+
+# --- Additional useful mappings ---
+[keys.normal]
+"C-s" = ":write"                        # Ctrl+S to save
+"A-j" = "move_line_down"                # Alt+j move line down
+"A-k" = "move_line_up"                  # Alt+k move line up
+"C-/" = "toggle_comments"                # Ctrl+/ for comments (common IDE shortcut)
+
+# Quick navigation
+"g" = { "b" = ":buffer-previous", "n" = ":buffer-next" }  # gb/gn for buffer navigation
+
+# Quick debugging (F-keys for debugging like other IDEs)
+"F5" = "dap_continue"                   # F5 to continue/start
+"F9" = "dap_toggle_breakpoint"          # F9 to toggle breakpoint
+"F10" = "dap_next"                      # F10 to step over
+"F11" = "dap_step_in"                   # F11 to step into
+"S-F11" = "dap_step_out"                # Shift+F11 to step out
+"S-F5" = "dap_terminate"                # Shift+F5 to stop
+
+[keys.insert]
+"j" = { "k" = "normal_mode" }           # jk to exit insert mode
+"C-s" = ":write"                        # Save in insert mode
