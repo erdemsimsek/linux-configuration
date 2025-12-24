@@ -14,5 +14,6 @@ This repository contains my config files for i3, Zellij, Helix, and more.
 - **hx**
 - **fzf**
 - **picom**
+- **lazygit**
 
 *(Generated automatically via script)*
