@@ -98,7 +98,7 @@ w = ":sh cargo watch -x run"                      # Watch and run (requires carg
 
 # --- Additional useful mappings ---
 [keys.normal]
-"C-s" = ":write"                        # Ctrl+S to save
+#"C-s" = ":write"                        # Ctrl+S to save
 "A-j" = "move_line_down"                # Alt+j move line down
 "A-k" = "move_line_up"                  # Alt+k move line up
 "C-/" = "toggle_comments"                # Ctrl+/ for comments (common IDE shortcut)
